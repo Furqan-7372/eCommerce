@@ -32,8 +32,8 @@
 		3DFC19E623CB4DBE9136BCC3 /* Metropolis-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9C21C46DCA7C4A61BAEB7F67 /* Metropolis-SemiBoldItalic.otf */; };
 		B876AA9B82B44FC991305E14 /* Metropolis-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 311AD87332A7442FAB805A41 /* Metropolis-Thin.otf */; };
 		053EE82B70E4493B9F1DC357 /* Metropolis-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 54A804D68CFD4E38A55B35D1 /* Metropolis-ThinItalic.otf */; };
-		FE570CAE5F484850AD094632 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 983728E7D16F46489BAC5B18 /* index.ts */; };
 		89CB808D2E05462FABC2B98B /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 46659B6BF62D4A508CA1EBE1 /* SIL Open Font License.txt */; };
+		803D0BC34D6C499B9FF233F2 /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 87B5CD909B8940F3A3CEB8DF /* index.ts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,8 +83,8 @@
 		9C21C46DCA7C4A61BAEB7F67 /* Metropolis-SemiBoldItalic.otf */ = {isa = PBXFileReference; name = "Metropolis-SemiBoldItalic.otf"; path = "../src/Assets/Fonts/metropolis/Metropolis-SemiBoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		311AD87332A7442FAB805A41 /* Metropolis-Thin.otf */ = {isa = PBXFileReference; name = "Metropolis-Thin.otf"; path = "../src/Assets/Fonts/metropolis/Metropolis-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		54A804D68CFD4E38A55B35D1 /* Metropolis-ThinItalic.otf */ = {isa = PBXFileReference; name = "Metropolis-ThinItalic.otf"; path = "../src/Assets/Fonts/metropolis/Metropolis-ThinItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		983728E7D16F46489BAC5B18 /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../src/Assets/Fonts/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		46659B6BF62D4A508CA1EBE1 /* SIL Open Font License.txt */ = {isa = PBXFileReference; name = "SIL Open Font License.txt"; path = "../src/Assets/Fonts/metropolis/SIL Open Font License.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		87B5CD909B8940F3A3CEB8DF /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../src/Assets/Fonts/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,8 +212,8 @@
 				9C21C46DCA7C4A61BAEB7F67 /* Metropolis-SemiBoldItalic.otf */,
 				311AD87332A7442FAB805A41 /* Metropolis-Thin.otf */,
 				54A804D68CFD4E38A55B35D1 /* Metropolis-ThinItalic.otf */,
-				983728E7D16F46489BAC5B18 /* index.ts */,
 				46659B6BF62D4A508CA1EBE1 /* SIL Open Font License.txt */,
+				87B5CD909B8940F3A3CEB8DF /* index.ts */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -332,8 +332,8 @@
 				3DFC19E623CB4DBE9136BCC3 /* Metropolis-SemiBoldItalic.otf in Resources */,
 				B876AA9B82B44FC991305E14 /* Metropolis-Thin.otf in Resources */,
 				053EE82B70E4493B9F1DC357 /* Metropolis-ThinItalic.otf in Resources */,
-				FE570CAE5F484850AD094632 /* index.ts in Resources */,
 				89CB808D2E05462FABC2B98B /* SIL Open Font License.txt in Resources */,
+				803D0BC34D6C499B9FF233F2 /* index.ts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

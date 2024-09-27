@@ -2,9 +2,8 @@ import { StyleSheet } from 'react-native';
 import { Dimensions } from 'react-native';
 import Colors from '../../Utils/color';
 
-let { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
-height = height - 60
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -35,7 +34,6 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     leftContainer: {
-      flex: 1,
       width: width*0.5,
       height: height*0.5,
     },

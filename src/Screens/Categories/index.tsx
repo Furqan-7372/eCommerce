@@ -1,14 +1,13 @@
+// HomeScreen.tsx
 import React from 'react';
 import {View} from 'react-native';
-import styles from './style';
+import styles from './style'; // Import your styles
 import CustomText from '../../Components/Text';
 import ImageTextTile from '../../Components/HomeScreenTiles/HomeScreenTiles';
 import images from '../../Assets/Images';
 import {Dimensions} from 'react-native';
 
-let {width, height} = Dimensions.get('window');
-
-height = height - 60
+const {width, height} = Dimensions.get('window');
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
@@ -17,7 +16,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         <View style={styles.leftContainer}>
           <View style={styles.leftTopContainer}>
             <CustomText color="red" fontSize={45}>
-              Summer sale
+              Summer Sale
             </CustomText>
           </View>
           <View style={styles.leftBottomContainer}>
@@ -28,7 +27,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               fontSize={45}
               alignment="flex-start"
               justify="flex-end"
-              containerStyle={{height: height * 0.25, width: width * 0.5}}
+              containerStyle={{height: height * 0.25, width: width * 0.5}} // Specific height
             />
           </View>
         </View>
@@ -39,7 +38,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             textColor="white"
             fontSize={45}
             alignment="center"
-            containerStyle={{width: width * 0.5, height: height * 0.5}}
+            containerStyle={{width: width * 0.5, height: height * 0.5}} // Specific height
           />
         </View>
       </View>
@@ -51,7 +50,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           fontSize={45}
           alignment="flex-end"
           justify="flex-end"
-          containerStyle={{width: width, height: height * 0.5}}
+          containerStyle={{width: width, height: height * 0.5}} // Specific height
         />
       </View>
     </View>
