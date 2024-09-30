@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground} from 'react-native';
-import CustomText from '../Text';
+import CustomText from '../CustomText/CustomText';
 import {IHomeScreenTiles} from '../../Interfaces/index'
 import Colors from '../../Utils/color';
 

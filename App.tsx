@@ -2,7 +2,8 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
-import BottomTabNavigator from './src/Navigation/BottomTabNavigator/BottomTabNavigator';
+import StoreToProductNavigator from './src/Navigation/StoreToProductNavigator/StoreToProductNavigator';
+
 
 const App = (): React.ReactElement => {
   return (
@@ -13,7 +14,7 @@ const App = (): React.ReactElement => {
           backgroundColor="transparent"
           barStyle="dark-content"
         />
-        <BottomTabNavigator />
+        <StoreToProductNavigator />
       </SafeAreaView>
     </NavigationContainer>
   );

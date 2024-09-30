@@ -1,13 +1,13 @@
 // StoreScreen.tsx
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import Fonts from '../../../android/app/build/intermediates/assets/debug/mergeDebugAssets/custom';
 import StoreNavigator from '../../Navigation/StoreNavigator/StoreNavigator';
 
 const StoreScreen: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Store</Text>
-      <StoreNavigator/>
+      <StoreNavigator />
     </View>
   );
 };
@@ -15,13 +15,11 @@ const StoreScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   header: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: Fonts.metropolisSemiBold,
     textAlign: 'center',
-    marginVertical: 10,
   },
 });
 

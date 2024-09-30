@@ -2,7 +2,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import styles from './style'; // Import your styles
-import CustomText from '../../Components/Text';
+import CustomText from '../../Components/CustomText';
 import ImageTextTile from '../../Components/HomeScreenTiles/HomeScreenTiles';
 import images from '../../Assets/Images';
 import {Dimensions} from 'react-native';

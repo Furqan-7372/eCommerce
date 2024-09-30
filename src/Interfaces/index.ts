@@ -1,6 +1,5 @@
 // index.ts
-
-import { TextProps } from 'react-native';
+import { TextProps, TextStyle, ImageSourcePropType, ViewStyle, StyleProp } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 
 // Interface for custom text components
@@ -8,18 +7,24 @@ export interface ICustomText extends TextProps {
   children: React.ReactNode;
   fontSize?: number;
   color?: string;
-  weight?: string;
+  fontWeight?: TextStyle['fontWeight']; 
+  fontFamily?: TextStyle['fontFamily'];
+  padding?: number
+  margin?: number
+}
+
+export interface IHomeScreen {
 }
 
 // Interface for home screen tiles
 export interface IHomeScreenTiles {
-  imageSource: any; // Consider specifying the type if possible (e.g., ImageSourcePropType)
+  imageSource: ImageSourcePropType;  // Corrected the image source type
   text: string;
   textColor?: string;
   fontSize?: number;
   justify?: 'flex-start' | 'center' | 'flex-end';
   alignment?: 'flex-start' | 'center' | 'flex-end';
-  containerStyle?: object;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 // Interface for StoreNavigator
@@ -37,14 +42,17 @@ export interface ICategoriesProps {
 
 }
 
-// Interface for Products Screen
-export interface IProductsProps {
+export interface ISummerSaleBanner {
 
 }
 
-// Interface for Product Details Screen
-export interface IProductDetailsProps {
+export interface IProductsProps {
+  categoryId: string;
+  onProductPress: (productId: string) => void;
+}
 
+export interface IProductDetailsProps {
+  productId: string;
 }
 
 // Type for GenderNavigator props using StackScreenProps
@@ -55,5 +63,11 @@ export type GenderNavigatorProps = StackScreenProps<{
 }>;
 
 export interface IMen {
+  navigation: any
+}
+export interface IWomen {
+  navigation: any
+}
+export interface IChildren {
   navigation: any
 }

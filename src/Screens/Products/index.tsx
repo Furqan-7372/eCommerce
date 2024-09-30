@@ -1,60 +1,45 @@
-// HomeScreen.tsx
 import React from 'react';
-import {View} from 'react-native';
-import styles from './style'; // Import your styles
-import CustomText from '../../Components/Text';
-import ImageTextTile from '../../Components/HomeScreenTiles/HomeScreenTiles';
+import { View, FlatList, StyleSheet } from 'react-native';
+import ProductTile from '../../Components/ProductTile/ProductTile';
 import images from '../../Assets/Images';
-import {Dimensions} from 'react-native';
 
-const {width, height} = Dimensions.get('window');
+const products = [
+  { id: '1', name: 'Product 1', price: '$19.99', image: images.cloth1 },
+  { id: '2', name: 'Product 2', price: '$29.99', image: images.cloth2 },
+  { id: '3', name: 'Product 3', price: '$39.99', image: images.cloth3 },
+  { id: '4', name: 'Product 4', price: '$49.99', image: images.cloth1 },
+  { id: '5', name: 'Product 5', price: '$59.99', image: images.cloth2 },
+  { id: '6', name: 'Product 6', price: '$69.99', image: images.cloth3 },
+];
 
-const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+const ProductsScreen = () => {
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.bottomContainer}>
-        <View style={styles.leftContainer}>
-          <View style={styles.leftTopContainer}>
-            <CustomText color="red" fontSize={45}>
-              Summer Sale
-            </CustomText>
-          </View>
-          <View style={styles.leftBottomContainer}>
-            <ImageTextTile
-              imageSource={images.home3}
-              text="Black"
-              textColor="white"
-              fontSize={45}
-              alignment="flex-start"
-              justify="flex-end"
-              containerStyle={{height: height * 0.25, width: width * 0.5}} // Specific height
-            />
-          </View>
-        </View>
-        <View style={styles.rightContainer}>
-          <ImageTextTile
-            imageSource={images.home2}
-            text="Men's hoodies"
-            textColor="white"
-            fontSize={45}
-            alignment="center"
-            containerStyle={{width: width * 0.5, height: height * 0.5}} // Specific height
+    <View style={styles.container}>
+      <FlatList
+        data={products}
+        renderItem={({ item }) => (
+          <ProductTile
+            image={item.image}
+            productName={item.name}
+            price={item.price}
           />
-        </View>
-      </View>
-      <View style={styles.topContainer}>
-        <ImageTextTile
-          imageSource={images.home1}
-          text="New Collection"
-          textColor="white"
-          fontSize={45}
-          alignment="flex-end"
-          justify="flex-end"
-          containerStyle={{width: width, height: height * 0.5}} // Specific height
-        />
-      </View>
+        )}
+        keyExtractor={item => item.id}
+        numColumns={2}
+        columnWrapperStyle={styles.row}
+      />
     </View>
   );
 };
 
-export default HomeScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  row: {
+    justifyContent: 'space-between', // To ensure spacing between columns
+  },
+});
+
+export default ProductsScreen;

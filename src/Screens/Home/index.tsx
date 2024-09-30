@@ -1,16 +1,17 @@
 import React from 'react';
 import {View} from 'react-native';
 import styles from './style';
-import CustomText from '../../Components/Text';
+import CustomText from '../../Components/CustomText/CustomText';
 import ImageTextTile from '../../Components/HomeScreenTiles/HomeScreenTiles';
 import images from '../../Assets/Images';
 import {Dimensions} from 'react-native';
+import {IHomeScreen} from '../../Interfaces/index'
 
 let {width, height} = Dimensions.get('window');
 
 height = height - 60
 
-const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+const HomeScreen: React.FC<IHomeScreen> = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.bottomContainer}>

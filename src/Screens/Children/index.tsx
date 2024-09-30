@@ -1,41 +1,51 @@
 // HomeScreen.tsx
 import React from 'react';
-import {Text, View} from 'react-native';
-import styles from './style'; // Import your styles
-import CustomText from '../../Components/Text';
-import ImageTextTile from '../../Components/HomeScreenTiles/HomeScreenTiles';
-import images from '../../Assets/Images';
-import {Dimensions} from 'react-native';
-import {IMen} from '../../Interfaces/index'
+import {View, StyleSheet} from 'react-native';
+import {IChildren} from '../../Interfaces/index';
 import CategoryTile from '../../Components/CategoryTile/CategoryTile';
+import images from '../../Assets/Images';
+import SummerSaleBanner from '../../Components/SummerSaleBanner/SummerSaleBanner';
+import {useNavigation} from '@react-navigation/native';
 
 
-const {width, height} = Dimensions.get('window');
+const Children: React.FC<IChildren> = () => {
+  const navigation = useNavigation();
 
-const Men: React.FC<IMen> = ({navigation}) => {
+  const handleCategoryClick = (categoryId: string) => {
+    navigation.navigate('ProductsStack', {categoryId});
+  };
   return (
-    <View style={styles.mainContainer}>
-      <View>
-        <CustomText>Summer Sales</CustomText>
-        <CustomText>Upto 50% Off</CustomText>
-      </View>
+    <View style={styles.container}>
+      <SummerSaleBanner />
       <CategoryTile
-      categoryName='Shoes'
-      imageSource={images.shoes1}
+        onPress={() => handleCategoryClick("New")}
+        categoryName="New"
+        imageSource={images.newItem1}
       />
       <CategoryTile
-      categoryName='Shirts'
-      imageSource={images.cloth1}
+        onPress={() => handleCategoryClick("Shirts")}
+        categoryName="Shirts"
+        imageSource={images.cloth1}
       />
       <CategoryTile
-      categoryName='New'
-      imageSource={images.newItem1}
+        onPress={() => handleCategoryClick("Shoes")}
+        categoryName="Shoes"
+        imageSource={images.shoes1}
       />
-      <View>
-        
-      </View>
+      <CategoryTile
+        onPress={() => handleCategoryClick("Accesories")}
+        categoryName="Accesories"
+        imageSource={images.home2}
+      />
     </View>
   );
 };
 
-export default Men;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+});
+
+export default Children;

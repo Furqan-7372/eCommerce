@@ -1,100 +1,121 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, FlatList, Dimensions } from 'react-native';
+import CartTile from '../../Components/CartTile/CartTile';
+import images from '../../Assets/Images';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import CustomText from '../../Components/CustomText/CustomText';
+import Fonts from '../../Assets/Fonts';
 
-type Item = {
-  id: number;
-  name: string;
-  color: string;
-  size: string;
-  price: number;
-};
+let { width, height } = Dimensions.get('window');
 
-const items: Item[] = [
-  { id: 1, name: 'Pullover', color: 'Black', size: 'L', price: 51 },
-  { id: 2, name: 'T-Shirt', color: 'Gray', size: 'L', price: 30 },
-  { id: 3, name: 'Sport Dress', color: 'Black & White', size: 'M', price: 43 }
+const cartData = [
+  {
+    id: '1',
+    imageSource: images.shoes2,
+    itemName: 'Shoes 2',
+    size: 'M',
+    color: 'White',
+    basePrice: 10,
+  },
+  {
+    id: '2',
+    imageSource: images.shoes2,
+    itemName: 'Shoes 2',
+    size: 'M',
+    color: 'White',
+    basePrice: 10,
+  },
+  {
+    id: '3',
+    imageSource: images.shoes2,
+    itemName: 'Shoes 2',
+    size: 'M',
+    color: 'White',
+    basePrice: 10,
+  },
 ];
 
-const BagScreen = () => {
-  const calculateTotal = () => items.reduce((sum, item) => sum + item.price, 0);
+
+const CartScreen: React.FC = () => {
+  // Calculate total price based on cart data
+  const calculateTotal = () => {
+    return cartData.reduce((sum, item) => sum + item.basePrice, 0);
+  };
+
+  // Render Footer for the FlatList
+  const renderFooter = () => {
+    return (
+      <View style={styles.footerContainer}>
+        <View style={styles.totalAmountContainer}>
+          <CustomText fontSize={20} fontFamily={Fonts.metropolisMedium}>Total amount:</CustomText>
+          <CustomText fontSize={24} fontFamily={Fonts.metropolisSemiBold}>{calculateTotal()}$</CustomText>
+        </View>
+
+        <TouchableOpacity onPress={()=>console.log('Check Out Pressed')} style={styles.checkoutButton}>
+          <CustomText fontSize={16} fontFamily={Fonts.metropolisMedium} color='white'>CHECK OUT</CustomText>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>My Bag</Text>
-      {items.map((item) => (
-        <View key={item.id} style={styles.itemContainer}>
-          {/* Image would be dynamically loaded */}
-          <Image source={{ uri: `image_url_for_${item.name}` }} style={styles.itemImage} />
-          <View style={styles.itemDescription}>
-            <Text>{item.name}</Text>
-            <Text>Color: {item.color}</Text>
-            <Text>Size: {item.size}</Text>
-          </View>
-          {/* Quantity Selector would be implemented here */}
-          <Text style={styles.itemPrice}>{`${item.price}$`}</Text>
-        </View>
-      ))}
-      <View style={styles.totalContainer}>
-        <Text>Total amount:</Text>
-        <Text>{`${calculateTotal()}$`}</Text>
+      <View style={styles.searchButtonContainer}>
+      <TouchableOpacity onPress={()=>console.log('Search Pressed')}>
+        <Fontisto name="search" size={30} color={'black'} />
+      </TouchableOpacity>
       </View>
 
-      {/* Checkout Button */}
-      <TouchableOpacity style={styles.checkoutButton}>
-        <Text style={styles.checkoutButtonText}>CHECK OUT</Text>
-      </TouchableOpacity>
+      <CustomText fontSize={40} fontFamily={Fonts.metropolisBold} style={styles.header}>
+        My Bag
+      </CustomText>
+
+      <FlatList
+        data={cartData}
+        renderItem={({ item }) => (
+          <CartTile
+            imageSource={item.imageSource}
+            itemName={item.itemName}
+            size={item.size}
+            color={item.color}
+            basePrice={item.basePrice}
+          />
+        )}
+        keyExtractor={(item) => item.id}
+        ListFooterComponent={renderFooter}  // Footer for total and checkout
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 16,
-    backgroundColor: '#fff',
+    marginTop: 40,
+    width: width,
+    height: height * 0.93,
+  },
+  searchButtonContainer: {
+    alignItems: 'flex-end',
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  itemImage: {
-    width: 50,
-    height: 50,
-    marginRight: 16,
-  },
-  itemDescription: {
-    flex: 1,
-  },
-  itemPrice: {
-    fontSize: 16,
+    fontSize: 34,
     fontWeight: 'bold',
   },
-  totalContainer: {
+  footerContainer: {
+    marginTop: 16,
+  },
+  totalAmountContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 16,
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderColor: '#ccc',
+    marginBottom: 16,
   },
   checkoutButton: {
-    marginTop: 16,
     padding: 16,
     backgroundColor: 'red',
     alignItems: 'center',
-    borderRadius: 8,
-  },
-  checkoutButtonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    borderRadius: 25,
   },
 });
 
-export default BagScreen;
+export default CartScreen;

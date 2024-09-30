@@ -1,20 +1,33 @@
 import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import CustomText from '../Text';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import CustomText from '../CustomText/CustomText';
+import {ImageSourcePropType} from 'react-native';
+import {Dimensions} from 'react-native';
+import Fonts from '../../Assets/Fonts/index';
+
+let {width, height} = Dimensions.get('window');
 
 type CategoryTileProps = {
   categoryName: string;
-  imageSource: string; // You can use ImageSourcePropType if importing static images
+  imageSource: ImageSourcePropType; // If using static images
   onPress?: () => void;
 };
 
-const CategoryTile: React.FC<CategoryTileProps> = ({ categoryName, imageSource, onPress }) => {
+const CategoryTile: React.FC<CategoryTileProps> = ({
+  categoryName,
+  imageSource,
+  onPress,
+}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.textContainer}>
-        <CustomText style={styles.categoryText} >{categoryName}</CustomText>
+        <View style={styles.innerTextContainer}>
+          <CustomText fontFamily={Fonts.metropolisSemiBold} fontSize={20} >{categoryName}</CustomText>
+        </View>
       </View>
-      <Image source={{ uri: imageSource }} style={styles.categoryImage} />
+      <View style={styles.imageContainer}>
+        <Image source={imageSource} style={styles.categoryImage} />
+      </View>
     </TouchableOpacity>
   );
 };
@@ -22,30 +35,32 @@ const CategoryTile: React.FC<CategoryTileProps> = ({ categoryName, imageSource, 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 16,
-    backgroundColor: '#fff', // You can adjust this as per your theme
-    borderRadius: 8,
+    width: width * 0.9,
+    height: height * 0.14,
     marginVertical: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   textContainer: {
     flex: 1,
+    
+    justifyContent: 'center',
+    backgroundColor: 'white',
   },
-  categoryText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333', // Adjust to your theme
+  innerTextContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    margin: '15%',
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
   },
   categoryImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25, // Makes the image circular if it's a square
-    marginLeft: 16,
+    flex: 1,
+    resizeMode: 'cover',
   },
 });
 
