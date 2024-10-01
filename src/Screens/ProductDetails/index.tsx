@@ -1,50 +1,58 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
-  Text,
   Image,
   StyleSheet,
   Dimensions,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import images from '../../Assets/Images';
+import {Picker} from '@react-native-picker/picker';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { StackScreenProps } from '@react-navigation/stack';
+import CustomText from '../../Components/CustomText/CustomText'; // Import your CustomText component
+import Fonts from '../../../android/app/build/intermediates/assets/debug/mergeDebugAssets/custom';
+import {IProductDetails} from '../../Interfaces';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
-let { width, height } = Dimensions.get('window');
+let {width, height} = Dimensions.get('window');
 
-// Define the navigation params for the screen
-interface ProductDetailProps extends StackScreenProps<any> {
-  route: {
-    params: {
-      productName: string; // Expecting product name from the route params
-    };
-  };
-}
+// import images from '../../Assets/Images';
+// import {StackScreenProps} from '@react-navigation/stack';
+// interface ProductDetailProps extends StackScreenProps<any> {
+//   route: {
+//     params: {
+//       productName: string;
+//     };
+//   };
+// }
 
-const ProductDetailScreen: React.FC<ProductDetailProps> = ({ navigation, route }) => {
-  const { productName } = route.params; // Get product name from route params
+// const name='home'
+
+const ProductDetailScreen: React.FC<IProductDetails> = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const {productDetails} = route.params;
+  const {name, price, sizes, colors, images} = productDetails;
   const [selectedSize, setSelectedSize] = useState('Size');
   const [selectedColor, setSelectedColor] = useState('Color');
 
   const handleShare = () => {
-    // Share functionality will go here
     console.log('Share icon pressed!');
   };
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: productName, // Set the header title to the product name
-      headerTitleAlign: 'center', 
+      title: name,
+      headerTitleAlign: 'center',
       headerRight: () => (
-        <TouchableOpacity onPress={handleShare} style={styles.headerIconContainer}>
+        <TouchableOpacity
+          onPress={handleShare}
+          style={styles.headerIconContainer}>
           <MaterialIcons name="share" size={25} color="black" />
         </TouchableOpacity>
       ),
     });
-  }, [navigation, productName]);
+  }, [navigation, name]);
 
   return (
     <View style={styles.container}>
@@ -53,14 +61,15 @@ const ProductDetailScreen: React.FC<ProductDetailProps> = ({ navigation, route }
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
         style={styles.imageScrollContainer}>
-        <Image source={images.cloth1} style={styles.image} />
-        <Image source={images.cloth2} style={styles.image} />
-        <Image source={images.cloth3} style={styles.image} />
+        <Image source={images} style={styles.image} />
+        <Image source={images} style={styles.image} />
+        <Image source={images} style={styles.image} />
       </ScrollView>
 
       <View style={styles.dropdownContainer}>
         <View style={styles.dropdown}>
           <Picker
+            style={styles.pickerText}
             selectedValue={selectedSize}
             onValueChange={itemValue => setSelectedSize(itemValue)}>
             <Picker.Item label="Size" value="" />
@@ -72,6 +81,7 @@ const ProductDetailScreen: React.FC<ProductDetailProps> = ({ navigation, route }
 
         <View style={styles.dropdown}>
           <Picker
+            style={styles.pickerText}
             selectedValue={selectedColor}
             onValueChange={itemValue => setSelectedColor(itemValue)}>
             <Picker.Item label="Color" value="" />
@@ -80,24 +90,37 @@ const ProductDetailScreen: React.FC<ProductDetailProps> = ({ navigation, route }
             <Picker.Item label="Other" value="other" />
           </Picker>
         </View>
-        <View style={styles.favouriteIconContainer}>
-          <MaterialIcons name="favorite-border" size={25} color={'grey'} />
-        </View>
+          <TouchableOpacity onPress={()=>{console.log('Added to Fav')}} style={styles.favouriteIconContainer}>
+            <MaterialIcons name="favorite-border" size={25} color={'grey'} />
+          </TouchableOpacity>
       </View>
 
       <View style={styles.productInfo}>
         <View style={styles.productNamePriceContainer}>
-          <Text style={styles.productName}>{productName}</Text>
-          <Text style={styles.price}>$ 99.99</Text>
+          <CustomText
+            fontSize={26}
+            fontFamily={Fonts.metropolisSemiBold}
+            fontWeight="bold">
+            {name}
+          </CustomText>
+          <CustomText fontFamily={Fonts.metropolisSemiBold} fontSize={26}>
+            $ {price}
+          </CustomText>
         </View>
-        <Text style={styles.description}>
+        <CustomText
+          fontSize={16}
+          fontFamily={Fonts.metropolisMedium}
+          color="#666"
+          margin={10}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
+        </CustomText>
       </View>
 
-      <TouchableOpacity style={styles.addToCartButton}>
-        <Text style={styles.addToCartButtonText}>Add to Cart</Text>
+      <TouchableOpacity onPress={()=>{console.log('Added to Cart')}} style={styles.addToCartButton}>
+        <CustomText fontSize={18} color="#fff">
+          Add to Cart
+        </CustomText>
       </TouchableOpacity>
     </View>
   );
@@ -114,7 +137,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: width * 0.7,
-    height: height * 0.5, // Adjust height as necessary
+    height: height * 0.5,
     margin: 2,
   },
   dropdownContainer: {
@@ -127,6 +150,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     width: '40%',
+  },
+  pickerText: {
+    fontSize: 16,
+    fontFamily: Fonts.metropolisMedium,
   },
   favouriteIconContainer: {
     justifyContent: 'center',
@@ -144,28 +171,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  productName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  price: {
-    fontSize: 26,
-  },
-  description: {
-    fontSize: 16,
-    color: '#666',
-    marginVertical: 10,
-  },
   addToCartButton: {
     backgroundColor: 'red',
     padding: 15,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  addToCartButtonText: {
-    fontSize: 18,
-    color: '#fff',
   },
   headerIconContainer: {
     marginRight: 15,

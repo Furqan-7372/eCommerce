@@ -32,27 +32,23 @@ export interface IStoreNavigator {
   
 }
 
-// Interface for GenderNavigator
-export interface IGenderNavigator {
-  
-}
-
-// Interface for Categories Screen
-export interface ICategoriesProps {
-
-}
-
 export interface ISummerSaleBanner {
 
 }
 
-export interface IProductsProps {
-  categoryId: string;
-  onProductPress: (productId: string) => void;
+export interface IProductsScreen {
+  products: []
 }
 
-export interface IProductDetailsProps {
-  productId: string;
+export interface IProductDetails {
+  product: {
+    id: string;
+    name: string;
+    price: number;
+    sizes: string[];
+    colors: string[];
+    images: ImageSourcePropType;
+  };
 }
 
 // Type for GenderNavigator props using StackScreenProps

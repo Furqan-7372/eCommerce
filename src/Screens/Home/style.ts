@@ -4,8 +4,6 @@ import Colors from '../../Utils/color';
 
 let { width, height } = Dimensions.get('window');
 
-height = height - 60
-
 const styles = StyleSheet.create({
     mainContainer: {
       flex: 1,

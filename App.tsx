@@ -2,8 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
-import StoreToProductNavigator from './src/Navigation/StoreToProductNavigator/StoreToProductNavigator';
-
+import MainNavigator from './src/Navigation/MainNavigator/MainNavigator';
 
 const App = (): React.ReactElement => {
   return (
@@ -14,7 +13,7 @@ const App = (): React.ReactElement => {
           backgroundColor="transparent"
           barStyle="dark-content"
         />
-        <StoreToProductNavigator />
+        <MainNavigator />
       </SafeAreaView>
     </NavigationContainer>
   );

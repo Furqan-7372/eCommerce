@@ -1,7 +1,7 @@
 // StoreScreen.tsx
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import Fonts from '../../../android/app/build/intermediates/assets/debug/mergeDebugAssets/custom';
+import Fonts from '../../Assets/Fonts/index';
 import StoreNavigator from '../../Navigation/StoreNavigator/StoreNavigator';
 
 const StoreScreen: React.FC = () => {

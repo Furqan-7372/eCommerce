@@ -1,38 +1,40 @@
 import React from 'react';
-import {Text, TextProps, StyleSheet, View} from 'react-native';
-import {ICustomText} from '../../Interfaces/index';
+import { Text, StyleSheet } from 'react-native';
+import { ICustomText } from '../../Interfaces/index';
 import Fonts from '../../Assets/Fonts';
 
 const CustomText: React.FC<ICustomText> = ({
   children,
-  fontSize,
-  color,
+  fontSize = 14,  // Default font size
+  color = '#000', // Default color
   fontWeight = 'regular',
   fontFamily = Fonts.metropolisBlack,
-  padding,
-  margin,
+  padding = 0,
+  margin = 0,
 }) => {
   return (
     <Text
       style={[
         styles.text,
         {
-          color: color,
-          fontSize: fontSize,
-          flexWrap: 'wrap',
-          fontWeight: fontWeight,
-          fontFamily: fontFamily,
-          padding: padding,
-          margin: margin,
+          fontSize,
+          color,
+          fontWeight,
+          fontFamily,
+          padding,
+          margin,
         },
-      ]}>
+      ]}
+    >
       {children}
     </Text>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {},
+  text: {
+    flexWrap: 'wrap', // Ensures text wrapping if it overflows
+  },
 });
 
 export default CustomText;

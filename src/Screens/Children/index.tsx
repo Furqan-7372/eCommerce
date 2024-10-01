@@ -1,41 +1,44 @@
 // HomeScreen.tsx
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import {IChildren} from '../../Interfaces/index';
 import CategoryTile from '../../Components/CategoryTile/CategoryTile';
 import images from '../../Assets/Images';
+import {StyleSheet} from 'react-native';
 import SummerSaleBanner from '../../Components/SummerSaleBanner/SummerSaleBanner';
 import {useNavigation} from '@react-navigation/native';
-
+import products from '../../Utils/data';
 
 const Children: React.FC<IChildren> = () => {
   const navigation = useNavigation();
 
-  const handleCategoryClick = (categoryId: string) => {
-    navigation.navigate('ProductsStack', {categoryId});
+  const { children } = products
+
+  const handleCategoryClick = (productsCategory: {}) => {
+    navigation.navigate('ProductsStack', {screen: 'Products', params: {productsCategory},});
   };
   return (
     <View style={styles.container}>
       <SummerSaleBanner />
       <CategoryTile
-        onPress={() => handleCategoryClick("New")}
+        onPress={() => handleCategoryClick(children.newProducts)}
         categoryName="New"
-        imageSource={images.newItem1}
+        imageSource={images.children.newItem1}
       />
       <CategoryTile
-        onPress={() => handleCategoryClick("Shirts")}
+        onPress={() => handleCategoryClick(children.shirts)}
         categoryName="Shirts"
-        imageSource={images.cloth1}
+        imageSource={images.children.cloth1}
       />
       <CategoryTile
-        onPress={() => handleCategoryClick("Shoes")}
+        onPress={() => handleCategoryClick(children.shoes)}
         categoryName="Shoes"
-        imageSource={images.shoes1}
+        imageSource={images.children.shoes1}
       />
       <CategoryTile
-        onPress={() => handleCategoryClick("Accesories")}
+        onPress={() => handleCategoryClick(children.accessories)}
         categoryName="Accesories"
-        imageSource={images.home2}
+        imageSource={images.children.accessories1}
       />
     </View>
   );

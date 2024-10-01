@@ -1,15 +1,12 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Dimensions} from 'react-native';
 import styles from './style';
 import CustomText from '../../Components/CustomText/CustomText';
 import ImageTextTile from '../../Components/HomeScreenTiles/HomeScreenTiles';
 import images from '../../Assets/Images';
-import {Dimensions} from 'react-native';
-import {IHomeScreen} from '../../Interfaces/index'
+import {IHomeScreen} from '../../Interfaces/index';
 
 let {width, height} = Dimensions.get('window');
-
-height = height - 60
 
 const HomeScreen: React.FC<IHomeScreen> = () => {
   return (
@@ -23,7 +20,7 @@ const HomeScreen: React.FC<IHomeScreen> = () => {
           </View>
           <View style={styles.leftBottomContainer}>
             <ImageTextTile
-              imageSource={images.home3}
+              imageSource={images.home.home3}
               text="Black"
               textColor="white"
               fontSize={45}
@@ -35,7 +32,7 @@ const HomeScreen: React.FC<IHomeScreen> = () => {
         </View>
         <View style={styles.rightContainer}>
           <ImageTextTile
-            imageSource={images.home2}
+            imageSource={images.home.home2}
             text="Men's hoodies"
             textColor="white"
             fontSize={45}
@@ -46,7 +43,7 @@ const HomeScreen: React.FC<IHomeScreen> = () => {
       </View>
       <View style={styles.topContainer}>
         <ImageTextTile
-          imageSource={images.home1}
+          imageSource={images.home.home1}
           text="New Collection"
           textColor="white"
           fontSize={45}

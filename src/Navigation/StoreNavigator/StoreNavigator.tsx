@@ -4,7 +4,7 @@ import {IStoreNavigator} from '../../Interfaces/index';
 import Men from '../../Screens/Men';
 import Women from '../../Screens/Women';
 import Children from '../../Screens/Children';
-import Fonts from '../../../android/app/build/intermediates/assets/debug/mergeDebugAssets/custom';
+import Fonts from '../../Assets/Fonts/index';
 
 const Tab = createMaterialTopTabNavigator();
 
