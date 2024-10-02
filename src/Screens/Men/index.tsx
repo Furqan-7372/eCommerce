@@ -1,7 +1,7 @@
 // HomeScreen.tsx
 import React from 'react';
 import {View} from 'react-native';
-import {IMen} from '../../Interfaces/index';
+import {IMenScreen} from '../../Interfaces/index';
 import CategoryTile from '../../Components/CategoryTile/CategoryTile';
 import images from '../../Assets/Images';
 import {StyleSheet} from 'react-native';
@@ -9,7 +9,7 @@ import SummerSaleBanner from '../../Components/SummerSaleBanner/SummerSaleBanner
 import {useNavigation} from '@react-navigation/native';
 import products from '../../Utils/data';
 
-const Men: React.FC<IMen> = () => {
+const Men: React.FC<IMenScreen> = () => {
   const navigation = useNavigation();
 
   const { men } = products

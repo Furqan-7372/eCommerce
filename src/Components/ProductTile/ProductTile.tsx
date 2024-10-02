@@ -1,17 +1,12 @@
 import React from 'react';
 import {View, Image, StyleSheet, Dimensions} from 'react-native';
 import CustomText from '../CustomText/CustomText';
-import Fonts from '../../../android/app/build/intermediates/assets/debug/mergeDebugAssets/custom';
+import Fonts from '../../Assets/Fonts/index';
+import {IProductTile} from '../../Interfaces';
 
 let {width, height} = Dimensions.get('window');
 
-interface ProductTileProps {
-  image: any; // Replace with a more specific type if needed
-  productName: string;
-  price: string;
-}
-
-const ProductTile: React.FC<ProductTileProps> = ({
+const ProductTile: React.FC<IProductTile> = ({
   image,
   productName,
   price,

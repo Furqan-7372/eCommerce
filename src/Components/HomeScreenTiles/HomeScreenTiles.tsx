@@ -3,6 +3,7 @@ import { View, StyleSheet, ImageBackground} from 'react-native';
 import CustomText from '../CustomText/CustomText';
 import {IHomeScreenTiles} from '../../Interfaces/index'
 import Colors from '../../Utils/color';
+import Fonts from '../../Assets/Fonts/index';
 
 const HomeScreenTiles: React.FC<IHomeScreenTiles> = ({
   imageSource,
@@ -16,7 +17,7 @@ const HomeScreenTiles: React.FC<IHomeScreenTiles> = ({
   return (
     <ImageBackground source={imageSource} style={[styles.image, containerStyle]}>
       <View style={[styles.textContainer, { alignItems: alignment, justifyContent: justify, }]}>
-        <CustomText color={textColor} fontSize={fontSize}>
+        <CustomText color={textColor} fontSize={fontSize} fontFamily={Fonts.metropolisBold}>
           {text}
         </CustomText>
       </View>

@@ -2,9 +2,11 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Products from '../../Screens/Products';
 import ProductDetails from '../../Screens/ProductDetails';
+import {ProductsStackParamList} from '../../Interfaces';
 
 
-const Stack = createStackNavigator();
+
+const Stack = createStackNavigator<ProductsStackParamList>();
 
 const ProductsStackNavigator: React.FC = () => {
   return (
@@ -12,11 +14,11 @@ const ProductsStackNavigator: React.FC = () => {
       <Stack.Screen
         name="Products"
         component={Products}
-        options={({ navigation }) => ({
+        options={{
           headerShown: true, 
           headerTransparent: true,
           headerTitle: '',
-        })}
+        }}
       />
  <Stack.Screen
         name="ProductDetails"

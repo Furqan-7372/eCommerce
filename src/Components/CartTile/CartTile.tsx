@@ -1,40 +1,50 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import CustomText from '../CustomText/CustomText';
-import {ImageSourcePropType} from 'react-native'; // Import this if using static images
+import {ICartTile} from '../../Interfaces';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {Dimensions} from 'react-native';
-import Fonts from '../../Assets/Fonts/index'
+import Fonts from '../../Assets/Fonts/index';
+import { useDispatch } from 'react-redux';
+import {removeFromCart, increaseQuantity, decreaseQuantity} from '../../Redux/Slices/CartSlice';
 
 let {width} = Dimensions.get('window');
 
-type CartTileProps = {
-  itemName: string;
-  imageSource: ImageSourcePropType; // If using static images
-  color: string;
-  size: 'L' | 'M' | 'S' | string; // Correct union type syntax
-  basePrice: number;
-};
-
-const CartTile: React.FC<CartTileProps> = ({
+const CartTile: React.FC<ICartTile> = ({
   itemName,
   imageSource,
   color,
   size,
-  basePrice,
+  price,
+  quantity,
+  id,
 }) => {
-  const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState(basePrice);
-  function quantityPlusHandler(){
-    setQuantity(quantity+1)
-    setPrice(basePrice*quantity)
+  const dispatch = useDispatch();
+  const [itemQuantity, setItemQuantity] = useState(quantity);
+  const [itemPrice, setItemPrice] = useState(price);
+
+  const handleRemoveItem = (itemId: string) => {
+    dispatch(removeFromCart({id: itemId}));
+  };
+
+  const quantityPlusHandler = () => {
+    setItemQuantity(itemQuantity + 1);
+    setItemPrice(price * (itemQuantity + 1));
+    dispatch(increaseQuantity({id: id}))
   }
-  function quantityMinusHandler(){
-    if (quantity>1) {
-      setQuantity(quantity-1)
-      setPrice(basePrice*quantity)
+
+  const quantityMinusHandler = () => {
+    if (itemQuantity > 1) {
+      setItemQuantity(itemQuantity - 1);
+      setItemPrice(price * (itemQuantity - 1));
+      dispatch(decreaseQuantity({id: id}))
     }
   }
+
+  useEffect(() => {
+    setItemQuantity(quantity)
+  }, [quantity])
+
   return (
     <View style={styles.container}>
       <Image source={imageSource} style={styles.itemImage} />
@@ -43,7 +53,7 @@ const CartTile: React.FC<CartTileProps> = ({
           <CustomText fontSize={20} fontFamily={Fonts.metropolisSemiBold}>
             {itemName}
           </CustomText>
-          <TouchableOpacity onPress={()=>console.log('More Options Pressed')}>
+          <TouchableOpacity onPress={()=>handleRemoveItem(id)}>
             <SimpleLineIcons name="options-vertical" size={20} color={'grey'} />
           </TouchableOpacity>
         </View>
@@ -69,15 +79,15 @@ const CartTile: React.FC<CartTileProps> = ({
         </View>
         <View style={styles.quantityPriceContainer}>
           <View style={styles.quantityButtonContainer}>
-          <TouchableOpacity onPress={quantityMinusHandler}>
-            <SimpleLineIcons name="minus" size={40} color={'grey'} />
-          </TouchableOpacity>
-            <CustomText>{quantity}</CustomText>
+            <TouchableOpacity onPress={quantityMinusHandler}>
+              <SimpleLineIcons name="minus" size={40} color={'grey'} />
+            </TouchableOpacity>
+            <CustomText>{itemQuantity}</CustomText>
             <TouchableOpacity onPress={quantityPlusHandler}>
-            <SimpleLineIcons name="plus" size={40} color={'grey'} />
-          </TouchableOpacity>
+              <SimpleLineIcons name="plus" size={40} color={'grey'} />
+            </TouchableOpacity>
           </View>
-          <CustomText>{price}$</CustomText>
+          <CustomText>$ {itemPrice.toFixed(2)}</CustomText>
         </View>
       </View>
     </View>

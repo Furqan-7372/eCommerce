@@ -1,7 +1,10 @@
 // HomeScreen.tsx
 import React from 'react';
 import {View} from 'react-native';
-import {IWomen} from '../../Interfaces/index';
+import {
+  IWomenScreen,
+  IProductsCategory,
+} from '../../Interfaces/index';
 import CategoryTile from '../../Components/CategoryTile/CategoryTile';
 import images from '../../Assets/Images';
 import {StyleSheet} from 'react-native';
@@ -9,14 +12,18 @@ import SummerSaleBanner from '../../Components/SummerSaleBanner/SummerSaleBanner
 import {useNavigation} from '@react-navigation/native';
 import products from '../../Utils/data';
 
-const Women: React.FC<IWomen> = () => {
+const Women: React.FC<IWomenScreen> = () => {
   const navigation = useNavigation();
 
-  const { women } = products
+  const {women} = products;
 
-  const handleCategoryClick = (productsCategory: {}) => {
-    navigation.navigate('ProductsStack', {screen: 'Products', params: {productsCategory},});
+  const handleCategoryClick = (productsCategory: IProductsCategory) => {
+    navigation.navigate('ProductsStack', {
+      screen: 'Products',
+      params: { productsCategory },
+    });
   };
+
   return (
     <View style={styles.container}>
       <SummerSaleBanner />

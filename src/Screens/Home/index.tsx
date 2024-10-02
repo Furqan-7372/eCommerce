@@ -26,7 +26,7 @@ const HomeScreen: React.FC<IHomeScreen> = () => {
               fontSize={45}
               alignment="flex-start"
               justify="flex-end"
-              containerStyle={{height: height * 0.25, width: width * 0.5}}
+              containerStyle={styles.containerStyle}
             />
           </View>
         </View>

@@ -6,8 +6,10 @@ import StoreScreen from '../../Screens/Store/index';
 import CartScreen from '../../Screens/Cart';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native';
+import {BottomTabParamList} from '../../Interfaces/index';
 
-const Tab = createBottomTabNavigator();
+
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabNavigator: React.FC = () => {
   return (

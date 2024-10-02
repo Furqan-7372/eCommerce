@@ -1,10 +1,10 @@
 // StoreScreen.tsx
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import Fonts from '../../Assets/Fonts/index';
 import StoreNavigator from '../../Navigation/StoreNavigator/StoreNavigator';
+import {IStoreScreen} from '../../Interfaces/index';
 
-const StoreScreen: React.FC = () => {
+const StoreScreen: React.FC<IStoreScreen>= () => {
   return (
     <View style={styles.container}>
       <StoreNavigator />
@@ -15,11 +15,6 @@ const StoreScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  header: {
-    fontSize: 24,
-    fontFamily: Fonts.metropolisSemiBold,
-    textAlign: 'center',
   },
 });
 

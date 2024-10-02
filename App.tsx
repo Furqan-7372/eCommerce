@@ -3,6 +3,8 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import MainNavigator from './src/Navigation/MainNavigator/MainNavigator';
+import { Provider } from 'react-redux';
+import store from './src/Redux/Store/Store'; // Adjust the path based on your structure
 
 const App = (): React.ReactElement => {
   return (
@@ -13,7 +15,9 @@ const App = (): React.ReactElement => {
           backgroundColor="transparent"
           barStyle="dark-content"
         />
-        <MainNavigator />
+        <Provider store={store}>
+          <MainNavigator />
+        </Provider>
       </SafeAreaView>
     </NavigationContainer>
   );

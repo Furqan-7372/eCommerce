@@ -1,46 +1,73 @@
 // index.ts
-import { TextProps, TextStyle, ImageSourcePropType, ViewStyle, StyleProp } from 'react-native';
-import { StackScreenProps } from '@react-navigation/stack';
+import {
+  TextProps,
+  TextStyle,
+  ImageSourcePropType,
+  ViewStyle,
+  StyleProp,
+} from 'react-native';
+import {StackNavigationProp, StackScreenProps} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
 
-// Interface for custom text components
-export interface ICustomText extends TextProps {
-  children: React.ReactNode;
-  fontSize?: number;
-  color?: string;
-  fontWeight?: TextStyle['fontWeight']; 
-  fontFamily?: TextStyle['fontFamily'];
-  padding?: number
-  margin?: number
+// Interfaces of Navigators
+
+export interface IMainNavigator
+  extends StackScreenProps<MainStackParamList, 'BottomNavigator'> {}
+
+export interface IStoreNavigator {}
+
+// Interfaces of ParamList
+
+export type MainStackParamList = {
+  BottomNavigator: undefined;
+  ProductsStack: undefined;
+};
+
+export type BottomTabParamList = {
+  Home: undefined;
+  Store: undefined;
+  Cart: undefined;
+};
+
+export type ProductsScreenNavigationProp = StackNavigationProp<
+  ProductsStackParamList,
+  'Products'
+>;
+
+export type ProductsStackParamList = {
+  Products: {productsCategory: IProductsCategory};
+  ProductDetails: {productDetails: IProductDetailsScreen['product']};
+};
+
+// Interfaces of Screen
+
+export interface IHomeScreen {}
+
+export interface IStoreScreen {}
+
+export interface ICartScreen {}
+
+export interface IMenScreen {
+  navigation: any;
+}
+export interface IWomenScreen {
+  navigation: StackNavigationProp<ProductsStackParamList, 'Products'>;
+}
+export interface IChildrenScreen {
+  navigation: any;
 }
 
-export interface IHomeScreen {
-}
-
-// Interface for home screen tiles
-export interface IHomeScreenTiles {
-  imageSource: ImageSourcePropType;  // Corrected the image source type
-  text: string;
-  textColor?: string;
-  fontSize?: number;
-  justify?: 'flex-start' | 'center' | 'flex-end';
-  alignment?: 'flex-start' | 'center' | 'flex-end';
-  containerStyle?: StyleProp<ViewStyle>;
-}
-
-// Interface for StoreNavigator
-export interface IStoreNavigator {
-  
-}
-
-export interface ISummerSaleBanner {
-
-}
+export type ProductDetailsRouteProp = RouteProp<
+  ProductsStackParamList,
+  'ProductDetails'
+>;
 
 export interface IProductsScreen {
-  products: []
+  navigation: ProductsScreenNavigationProp;
+  products: IProductDetailsScreen['product'][];
 }
 
-export interface IProductDetails {
+export interface IProductDetailsScreen {
   product: {
     id: string;
     name: string;
@@ -51,19 +78,70 @@ export interface IProductDetails {
   };
 }
 
-// Type for GenderNavigator props using StackScreenProps
-export type GenderNavigatorProps = StackScreenProps<{
-  Categories: undefined;
-  Products: undefined;
-  ProductDetails: { productId: string };
-}>;
+// Interfaces of Components
 
-export interface IMen {
-  navigation: any
+export interface ICustomText extends TextProps {
+  children: React.ReactNode;
+  fontSize?: number;
+  color?: string;
+  fontWeight?: TextStyle['fontWeight'];
+  fontFamily?: TextStyle['fontFamily'];
+  padding?: number;
+  margin?: number;
 }
-export interface IWomen {
-  navigation: any
+
+export interface IHomeScreenTiles {
+  imageSource: ImageSourcePropType;
+  text: string;
+  textColor?: string;
+  fontSize?: number;
+  justify?: 'flex-start' | 'center' | 'flex-end';
+  alignment?: 'flex-start' | 'center' | 'flex-end';
+  containerStyle?: StyleProp<ViewStyle>;
 }
-export interface IChildren {
-  navigation: any
+
+export interface IProductTile {
+  image: ImageSourcePropType;
+  productName: string;
+  price: number;
+}
+
+export type ICartTile = {
+  id: string;
+  itemName: string;
+  imageSource: ImageSourcePropType;
+  color: 'Black' | 'White' | 'Other' | string;
+  size: 'L' | 'M' | 'S' | string;
+  price: number;
+  quantity: number;
+};
+
+export interface ISummerSaleBanner {}
+
+// Interfaces of Data
+
+export interface IProduct {
+  id: string;
+  name: string;
+  price: number;
+  color: 'Black' | 'White' | 'Other' | string;
+  size: 'L' | 'M' | 'S' | string;
+  images: ImageSourcePropType;
+}
+
+export interface IProductsCategory {
+  label: string;
+  data: IProduct[];
+}
+
+// Interfaces of Redux
+
+export interface CartItem extends IProduct {
+  selectedSize: string;
+  selectedColor: string;
+  quantity: number;
+}
+
+export interface CartState {
+  items: CartItem[];
 }
