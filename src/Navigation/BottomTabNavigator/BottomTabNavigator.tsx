@@ -7,6 +7,8 @@ import CartScreen from '../../Screens/Cart';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native';
 import {BottomTabParamList} from '../../Interfaces/index';
+import Colors from '../../Utils/color';
+
 
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
@@ -16,8 +18,8 @@ const BottomTabNavigator: React.FC = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: 'red',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: Colors.primary200,
+        tabBarInactiveTintColor: Colors.primary900,
         tabBarStyle: {
           height: 50,
         },
@@ -39,7 +41,7 @@ const BottomTabNavigator: React.FC = () => {
           headerTitle: 'Category',
           headerRight: () => (
             <TouchableOpacity style={{paddingRight: 15}} onPress={() => console.log('Search pressed')}>
-              <Ionicons name="search" size={24} color="black" />
+              <Ionicons name="search" size={24} color={Colors.primary50} />
             </TouchableOpacity>
           ),
           tabBarIcon: ({color, size}) => (
@@ -47,7 +49,7 @@ const BottomTabNavigator: React.FC = () => {
           ),
           headerTitleAlign: 'center',
           headerStyle: {
-            backgroundColor: '#fff',
+            backgroundColor: Colors.primary0,
             elevation: 0,
           },
         }}

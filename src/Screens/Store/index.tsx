@@ -3,6 +3,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import StoreNavigator from '../../Navigation/StoreNavigator/StoreNavigator';
 import {IStoreScreen} from '../../Interfaces/index';
+import styles from './style';
 
 const StoreScreen: React.FC<IStoreScreen>= () => {
   return (
@@ -11,11 +12,5 @@ const StoreScreen: React.FC<IStoreScreen>= () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default StoreScreen;

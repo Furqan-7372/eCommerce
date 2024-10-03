@@ -1,15 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { Dimensions } from 'react-native';
+import {height, width} from '../../Utils/dimensions'
 import Colors from '../../Utils/color';
 import Fonts from '../../Assets/Fonts/index';
-
-const { width, height } = Dimensions.get('window');
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.primary0,
     padding: 20,
   },
   imageScrollContainer: {
@@ -32,7 +30,7 @@ const styles = StyleSheet.create({
     width: '40%',
   },
   pickerText: {
-    fontSize: 16,
+    fontSize: height*0.0167,
     fontFamily: Fonts.metropolisMedium,
   },
   favouriteIconContainer: {
@@ -52,11 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   addToCartButton: {
-    backgroundColor: 'red',
-    padding: 15,
-    borderRadius: 25,
     alignItems: 'center',
-    justifyContent: 'center',
   },
   headerIconContainer: {
     marginRight: 15,

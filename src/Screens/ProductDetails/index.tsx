@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Image, ScrollView, TouchableOpacity, Alert} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import CustomText from '../../Components/CustomText/CustomText';
+import CustomText from '../../Components/CustomText';
 import Fonts from '../../Assets/Fonts/index';
 import Colors from '../../Utils/color';
 import {IProductDetailsScreen, ProductDetailsRouteProp} from '../../Interfaces';
@@ -10,10 +10,8 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import styles from './style';
 import {useDispatch} from 'react-redux';
 import {addToCart} from '../../Redux/Slices/CartSlice';
-import { Dimensions } from 'react-native';
-
-const { width, height } = Dimensions.get('window');
-
+import {height} from '../../Utils/dimensions';
+import SubmitButton from '../../Components/SubmitButtom';
 
 const ProductDetailScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -66,7 +64,7 @@ const ProductDetailScreen: React.FC = () => {
         <TouchableOpacity
           onPress={handleShare}
           style={styles.headerIconContainer}>
-          <MaterialIcons name="share" size={25} color="black" />
+          <MaterialIcons name="share" size={25} color={Colors.primary50} />
         </TouchableOpacity>
       ),
     });
@@ -77,8 +75,7 @@ const ProductDetailScreen: React.FC = () => {
       <ScrollView
         horizontal={true}
         pagingEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        >
+        showsHorizontalScrollIndicator={false}>
         <View style={styles.imageScrollContainer}>
           <Image source={images} style={styles.image} />
           <Image source={images} style={styles.image} />
@@ -115,39 +112,45 @@ const ProductDetailScreen: React.FC = () => {
             console.log('Added to Fav');
           }}
           style={styles.favouriteIconContainer}>
-          <MaterialIcons name="favorite-border" size={25} color={'grey'} />
+          <MaterialIcons
+            name="favorite-border"
+            size={25}
+            color={Colors.primary900}
+          />
         </TouchableOpacity>
       </View>
 
       <View style={styles.productInfo}>
         <View style={styles.productNamePriceContainer}>
           <CustomText
-            fontSize={26}
+            fontSize={height * 0.0273}
             fontFamily={Fonts.metropolisSemiBold}
             fontWeight="bold">
             {name}
           </CustomText>
-          <CustomText fontFamily={Fonts.metropolisSemiBold} fontSize={26}>
+          <CustomText
+            fontFamily={Fonts.metropolisSemiBold}
+            fontSize={height * 0.0273}>
             $ {price}
           </CustomText>
         </View>
         <CustomText
-          fontSize={16}
+          fontSize={height * 0.0167}
           fontFamily={Fonts.metropolisMedium}
-          color="#666"
+          color={Colors.primary900}
           margin={10}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </CustomText>
       </View>
 
-      <TouchableOpacity
-        onPress={handleAddToCart}
-        style={styles.addToCartButton}>
-        <CustomText fontSize={18} color="#fff">
-          Add to Cart
-        </CustomText>
-      </TouchableOpacity>
+      <View style={styles.addToCartButton}>
+        <SubmitButton
+          onPress={handleAddToCart}
+          text="Add to Cart"
+          fontSize={height * 0.0187}
+        />
+      </View>
     </View>
   );
 };

@@ -4,15 +4,15 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
-  Dimensions,
 } from 'react-native';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import ProductTile from '../../Components/ProductTile/ProductTile';
+import {RouteProp, useRoute} from '@react-navigation/native';
+import ProductTile from '../../Components/ProductTile';
 import images from '../../Assets/Images';
-import HomeScreenTiles from '../../Components/HomeScreenTiles/HomeScreenTiles';
+import HomeScreenTiles from '../../Components/HomeScreenTiles';
 import {IProductDetailsScreen, IProductsScreen, ProductsStackParamList} from '../../Interfaces';
-
-let {width, height} = Dimensions.get('window');
+import {height, width} from '../../Utils/dimensions'
+import Colors from '../../Utils/color';
+import styles from './style';
 
 
 
@@ -25,7 +25,6 @@ const ProductsScreen: React.FC<IProductsScreen> = ({navigation}) => {
     navigation.navigate('ProductDetails', {productDetails});
   };
 
-  // Render item separated out as a function
   const renderItem = ({item}: {item: IProductDetailsScreen['product']}) => (
     <TouchableOpacity
       style={styles.tileContainer}
@@ -42,8 +41,8 @@ const ProductsScreen: React.FC<IProductsScreen> = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <HomeScreenTiles
-          textColor="white"
-          fontSize={45}
+          textColor={Colors.primary0}
+          fontSize={height*0.0475}
           alignment="flex-start"
           justify="flex-end"
           containerStyle={{width: width, height: height * 0.25}}
@@ -63,25 +62,5 @@ const ProductsScreen: React.FC<IProductsScreen> = ({navigation}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  headerContainer: {
-    flex: 1,
-    width: width,
-  },
-  flatlistContainer: {
-    flex: 3,
-  },
-  row: {
-    justifyContent: 'space-evenly',
-  },
-  tileContainer: {
-    padding: 5,
-    width: width * 0.45,
-  },
-});
 
 export default ProductsScreen;

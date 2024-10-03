@@ -1,22 +1,25 @@
-// HomeScreen.tsx
 import React from 'react';
 import {View} from 'react-native';
 import {IChildrenScreen} from '../../Interfaces/index';
-import CategoryTile from '../../Components/CategoryTile/CategoryTile';
+import CategoryTile from '../../Components/CategoryTile';
 import images from '../../Assets/Images';
-import {StyleSheet} from 'react-native';
-import SummerSaleBanner from '../../Components/SummerSaleBanner/SummerSaleBanner';
+import SummerSaleBanner from '../../Components/SummerSaleBanner';
 import {useNavigation} from '@react-navigation/native';
 import products from '../../Utils/data';
+import styles from './style';
 
 const Children: React.FC<IChildrenScreen> = () => {
   const navigation = useNavigation();
 
-  const { children } = products
+  const {children} = products;
 
   const handleCategoryClick = (productsCategory: {}) => {
-    navigation.navigate('ProductsStack', {screen: 'Products', params: {productsCategory},});
+    navigation.navigate('ProductsStack', {
+      screen: 'Products',
+      params: {productsCategory},
+    });
   };
+
   return (
     <View style={styles.container}>
       <SummerSaleBanner />
@@ -43,12 +46,5 @@ const Children: React.FC<IChildrenScreen> = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-});
 
 export default Children;

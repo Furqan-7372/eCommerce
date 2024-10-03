@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Image, StyleSheet, Dimensions} from 'react-native';
-import CustomText from '../CustomText/CustomText';
+import {View, Image} from 'react-native';
+import CustomText from '../CustomText';
 import Fonts from '../../Assets/Fonts/index';
 import {IProductTile} from '../../Interfaces';
-
-let {width, height} = Dimensions.get('window');
+import Colors from '../../Utils/color';
+import styles from './style';
 
 const ProductTile: React.FC<IProductTile> = ({
   image,
@@ -23,35 +23,12 @@ const ProductTile: React.FC<IProductTile> = ({
         <CustomText
           fontSize={16}
           fontFamily={Fonts.metropolisMedium}
-          color="red">
+          color={Colors.primary200}>
           {price}
         </CustomText>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    borderRadius: 10,
-    overflow: 'hidden',
-  },
-  imageContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 5,
-  },
-  image: {
-    width: width * 0.38,
-    height: height * 0.25, // Adjust the height as needed
-    borderRadius: 5,
-  },
-  textContainer: {
-    flex: 1,
-    margin: 5,
-    paddingHorizontal: 5,
-  },
-});
 
 export default ProductTile;

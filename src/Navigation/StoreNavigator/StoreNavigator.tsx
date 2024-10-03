@@ -5,6 +5,9 @@ import Men from '../../Screens/Men';
 import Women from '../../Screens/Women';
 import Children from '../../Screens/Children';
 import Fonts from '../../Assets/Fonts/index';
+import Colors from '../../Utils/color';
+import { height } from '../../Utils/dimensions';
+
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -13,12 +16,12 @@ const StoreNavigator: React.FC<IStoreNavigator> = () => {
     <Tab.Navigator
       initialRouteName="Women"
       screenOptions={{
-        tabBarActiveTintColor: 'red',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: Colors.primary200,
+        tabBarInactiveTintColor: Colors.primary900,
         tabBarIndicatorStyle: {
-          backgroundColor: 'red',
+          backgroundColor: Colors.primary200,
         },
-        tabBarLabelStyle: {fontSize: 18, fontFamily: Fonts.metropolisSemiBold},
+        tabBarLabelStyle: {fontSize: height*0.0187, fontFamily: Fonts.metropolisSemiBold},
       }}>
         <Tab.Screen
           name="Women"

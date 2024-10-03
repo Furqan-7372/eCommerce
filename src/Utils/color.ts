@@ -10,6 +10,7 @@ const Colors = {
     primary600: '#3b55c7',
     primary700: '#381e68',
     primary800: '#1DB954',
+    primary900: 'grey',
 
     backgroundColor: '#bcbcd8'
 }

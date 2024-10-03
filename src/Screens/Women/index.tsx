@@ -1,26 +1,22 @@
-// HomeScreen.tsx
 import React from 'react';
 import {View} from 'react-native';
-import {
-  IWomenScreen,
-  IProductsCategory,
-} from '../../Interfaces/index';
-import CategoryTile from '../../Components/CategoryTile/CategoryTile';
+import {IWomenScreen, IProductsCategory} from '../../Interfaces/index';
+import CategoryTile from '../../Components/CategoryTile';
 import images from '../../Assets/Images';
-import {StyleSheet} from 'react-native';
-import SummerSaleBanner from '../../Components/SummerSaleBanner/SummerSaleBanner';
+import SummerSaleBanner from '../../Components/SummerSaleBanner';
 import {useNavigation} from '@react-navigation/native';
 import products from '../../Utils/data';
+import styles from './style';
 
 const Women: React.FC<IWomenScreen> = () => {
   const navigation = useNavigation();
 
   const {women} = products;
 
-  const handleCategoryClick = (productsCategory: IProductsCategory) => {
+  const handleCategoryClick = (productsCategory: {}) => {
     navigation.navigate('ProductsStack', {
       screen: 'Products',
-      params: { productsCategory },
+      params: {productsCategory},
     });
   };
 
@@ -50,12 +46,5 @@ const Women: React.FC<IWomenScreen> = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-});
 
 export default Women;

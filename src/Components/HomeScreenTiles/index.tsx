@@ -1,15 +1,17 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground} from 'react-native';
-import CustomText from '../CustomText/CustomText';
+import { View, ImageBackground} from 'react-native';
+import CustomText from '../CustomText';
 import {IHomeScreenTiles} from '../../Interfaces/index'
 import Colors from '../../Utils/color';
 import Fonts from '../../Assets/Fonts/index';
+import { height } from '../../Utils/dimensions';
+import styles from './style';
 
 const HomeScreenTiles: React.FC<IHomeScreenTiles> = ({
   imageSource,
   text,
   textColor = Colors.primary0,
-  fontSize = 45,
+  fontSize = height*0.0475,
   alignment = 'center',
   justify= 'center',
   containerStyle,
@@ -24,16 +26,5 @@ const HomeScreenTiles: React.FC<IHomeScreenTiles> = ({
     </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-  },
-  textContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    padding: 20,
-  },
-});
 
 export default HomeScreenTiles;

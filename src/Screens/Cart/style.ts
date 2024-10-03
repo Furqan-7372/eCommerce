@@ -1,10 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { Dimensions } from 'react-native';
 import Colors from '../../Utils/color';
-
-const { width, height } = Dimensions.get('window');
-
-
+import {height, width} from '../../Utils/dimensions'
 
 const styles = StyleSheet.create({
   container: {
@@ -32,10 +28,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   checkoutButton: {
-    padding: 16,
-    backgroundColor: Colors.primary200,
     alignItems: 'center',
-    borderRadius: 25,
   },
 });
 

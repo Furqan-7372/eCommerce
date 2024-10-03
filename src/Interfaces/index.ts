@@ -19,6 +19,7 @@ export interface IStoreNavigator {}
 // Interfaces of ParamList
 
 export type MainStackParamList = {
+  Login: undefined;
   BottomNavigator: undefined;
   ProductsStack: undefined;
 };
@@ -40,6 +41,8 @@ export type ProductsStackParamList = {
 };
 
 // Interfaces of Screen
+
+export interface ILoginScreen {}
 
 export interface IHomeScreen {}
 
@@ -72,8 +75,8 @@ export interface IProductDetailsScreen {
     id: string;
     name: string;
     price: number;
-    sizes: string[];
-    colors: string[];
+    colors: [];
+    sizes: [];
     images: ImageSourcePropType;
   };
 }
@@ -82,12 +85,22 @@ export interface IProductDetailsScreen {
 
 export interface ICustomText extends TextProps {
   children: React.ReactNode;
-  fontSize?: number;
-  color?: string;
+  color?: TextStyle['color']
+  fontSize?: TextStyle['fontSize'];
   fontWeight?: TextStyle['fontWeight'];
   fontFamily?: TextStyle['fontFamily'];
   padding?: number;
   margin?: number;
+}
+
+export interface ISubmitButton {
+  onPress: ()=>void
+  text: string;
+  textColor?: TextStyle['color']
+  fontSize?: TextStyle['fontSize'];
+  fontWeight?: TextStyle['fontWeight'];
+  fontFamily?: TextStyle['fontFamily'];
+  bgColor?: ViewStyle['backgroundColor'];
 }
 
 export interface IHomeScreenTiles {
@@ -110,8 +123,8 @@ export type ICartTile = {
   id: string;
   itemName: string;
   imageSource: ImageSourcePropType;
-  color: 'Black' | 'White' | 'Other' | string;
-  size: 'L' | 'M' | 'S' | string;
+  colors: string;
+  sizes: string;
   price: number;
   quantity: number;
 };
@@ -124,8 +137,8 @@ export interface IProduct {
   id: string;
   name: string;
   price: number;
-  color: 'Black' | 'White' | 'Other' | string;
-  size: 'L' | 'M' | 'S' | string;
+  colors: [];
+  sizes: [];
   images: ImageSourcePropType;
 }
 
@@ -133,6 +146,12 @@ export interface IProductsCategory {
   label: string;
   data: IProduct[];
 }
+
+export type CategoryTileProps = {
+  categoryName: string;
+  imageSource: ImageSourcePropType; // If using static images
+  onPress?: () => void;
+};
 
 // Interfaces of Redux
 

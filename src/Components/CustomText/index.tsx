@@ -1,12 +1,15 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { ICustomText } from '../../Interfaces/index';
+import {Text} from 'react-native';
+import {ICustomText} from '../../Interfaces/index';
 import Fonts from '../../Assets/Fonts';
+import Colors from '../../Utils/color';
+import {height} from '../../Utils/dimensions';
+import styles from './style';
 
 const CustomText: React.FC<ICustomText> = ({
   children,
-  fontSize = 14,  // Default font size
-  color = '#000', // Default color
+  fontSize = height * 0.0145, // Default font size
+  color = Colors.primary50, // Default color
   fontWeight = 'regular',
   fontFamily = Fonts.metropolisBlack,
   padding = 0,
@@ -24,17 +27,10 @@ const CustomText: React.FC<ICustomText> = ({
           padding,
           margin,
         },
-      ]}
-    >
+      ]}>
       {children}
     </Text>
   );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    flexWrap: 'wrap', // Ensures text wrapping if it overflows
-  },
-});
 
 export default CustomText;
