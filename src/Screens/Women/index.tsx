@@ -1,47 +1,77 @@
-import React from 'react';
-import {View} from 'react-native';
-import {IWomenScreen, IProductsCategory} from '../../Interfaces/index';
+import React, {useEffect, useState} from 'react';
+import {View, FlatList, ActivityIndicator, Text} from 'react-native';
+import {IWomenScreen} from '../../Interfaces/index';
 import CategoryTile from '../../Components/CategoryTile';
-import images from '../../Assets/Images';
 import SummerSaleBanner from '../../Components/SummerSaleBanner';
 import {useNavigation} from '@react-navigation/native';
-import products from '../../Utils/data';
 import styles from './style';
+import {getStore} from '../../Services/index';
 
 const Women: React.FC<IWomenScreen> = () => {
   const navigation = useNavigation();
+  const [storeData, setStoreData] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const {women} = products;
+  const fetchStoreData = async () => {
+    const data: any[] = [];
 
-  const handleCategoryClick = (productsCategory: {}) => {
+    for (let shopNumber = 1; shopNumber <= 4; shopNumber++) {
+      try {
+        const result = await getStore(shopNumber);
+        data.push(result.data);
+      } catch (err) {
+        const typedError = err as Error;
+        console.error(`Error fetching store ${shopNumber}:`, typedError);
+        setError(typedError.message);
+      }
+    }
+
+    setStoreData(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchStoreData();
+  }, []);
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+  if (error) return <Text>Error: {error}</Text>;
+
+  const handleCategoryClick = (products: any) => {
+    console.log('dsadasdadadad', products);
     navigation.navigate('ProductsStack', {
       screen: 'Products',
-      params: {productsCategory},
+      params: {
+        products: products.products,
+        name: products.name,
+        image: products.image.path,
+      },
     });
   };
+
+  const renderItem = ({
+    item,
+  }: {
+    item: {name: string; image: any; products: any};
+  }) => (
+    <CategoryTile
+      onPress={() => handleCategoryClick(item)}
+      categoryName={item.name}
+      image={item.image.path}
+    />
+  );
 
   return (
     <View style={styles.container}>
       <SummerSaleBanner />
-      <CategoryTile
-        onPress={() => handleCategoryClick(women.newProducts)}
-        categoryName="New"
-        imageSource={images.women.newItem1}
-      />
-      <CategoryTile
-        onPress={() => handleCategoryClick(women.shirts)}
-        categoryName="Shirts"
-        imageSource={images.women.cloth1}
-      />
-      <CategoryTile
-        onPress={() => handleCategoryClick(women.shoes)}
-        categoryName="Shoes"
-        imageSource={images.women.shoes1}
-      />
-      <CategoryTile
-        onPress={() => handleCategoryClick(women.accessories)}
-        categoryName="Accesories"
-        imageSource={images.women.accessories1}
+      <FlatList
+        data={storeData}
+        renderItem={renderItem}
+        keyExtractor={(index) => index.toString()}
+        contentContainerStyle={{paddingBottom: 20}}
       />
     </View>
   );

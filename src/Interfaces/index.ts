@@ -1,4 +1,3 @@
-// index.ts
 import {
   TextProps,
   TextStyle,
@@ -36,7 +35,7 @@ export type ProductsScreenNavigationProp = StackNavigationProp<
 >;
 
 export type ProductsStackParamList = {
-  Products: {productsCategory: IProductsCategory};
+  Products: IProductsCategory
   ProductDetails: {productDetails: IProductDetailsScreen['product']};
 };
 
@@ -73,11 +72,10 @@ export interface IProductsScreen {
 export interface IProductDetailsScreen {
   product: {
     id: string;
-    name: string;
+    title: string;
     price: number;
-    colors: [];
-    sizes: [];
-    images: ImageSourcePropType;
+    image: string;
+    description: string;
   };
 }
 
@@ -85,7 +83,7 @@ export interface IProductDetailsScreen {
 
 export interface ICustomText extends TextProps {
   children: React.ReactNode;
-  color?: TextStyle['color']
+  color?: TextStyle['color'];
   fontSize?: TextStyle['fontSize'];
   fontWeight?: TextStyle['fontWeight'];
   fontFamily?: TextStyle['fontFamily'];
@@ -94,9 +92,9 @@ export interface ICustomText extends TextProps {
 }
 
 export interface ISubmitButton {
-  onPress: ()=>void
+  onPress: () => void;
   text: string;
-  textColor?: TextStyle['color']
+  textColor?: TextStyle['color'];
   fontSize?: TextStyle['fontSize'];
   fontWeight?: TextStyle['fontWeight'];
   fontFamily?: TextStyle['fontFamily'];
@@ -114,17 +112,15 @@ export interface IHomeScreenTiles {
 }
 
 export interface IProductTile {
-  image: ImageSourcePropType;
+  image: string;
   productName: string;
   price: number;
 }
 
 export type ICartTile = {
   id: string;
-  itemName: string;
-  imageSource: ImageSourcePropType;
-  colors: string;
-  sizes: string;
+  title: string;
+  image: string;
   price: number;
   quantity: number;
 };
@@ -135,32 +131,35 @@ export interface ISummerSaleBanner {}
 
 export interface IProduct {
   id: string;
-  name: string;
   price: number;
-  colors: [];
-  sizes: [];
-  images: ImageSourcePropType;
+  title: string;
+  description: string;
+  image: string;
 }
 
 export interface IProductsCategory {
   label: string;
-  data: IProduct[];
+  // data: IProduct[];
+  name: string;
+  products: []
 }
 
 export type CategoryTileProps = {
   categoryName: string;
-  imageSource: ImageSourcePropType; // If using static images
+  image: string;
   onPress?: () => void;
 };
 
 // Interfaces of Redux
 
 export interface CartItem extends IProduct {
-  selectedSize: string;
-  selectedColor: string;
   quantity: number;
 }
 
 export interface CartState {
   items: CartItem[];
+}
+
+export interface AuthState {
+  accessToken: string | null;
 }

@@ -1,16 +1,27 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, TextInput} from 'react-native';
 import styles from './style';
 import CustomText from '../../Components/CustomText';
 import {height} from '../../Utils/dimensions';
 import {ILoginScreen} from '../../Interfaces/index';
-import {TextInput} from 'react-native';
 import SubmitButton from '../../Components/SubmitButtom';
 import Fonts from '../../Assets/Fonts/index';
+import { loginUser } from '../../Services/index';
+import {useDispatch} from 'react-redux';
+import {login} from '../../Redux/Slices/AuthSlice'
+
 
 const LoginScreen: React.FC<ILoginScreen> = () => {
-  const handleOnPress = () => {
-    console.log('LOGIN');
+  const dispatch = useDispatch();
+
+  const handleOnPress = async () => {
+    try {
+      const data = await loginUser('tom@mailinator.com', '12345678')
+      console.log(data)
+      dispatch(login(data))
+    } catch (error) {
+      console.log('Error during login', error);
+    }
   };
 
   return (

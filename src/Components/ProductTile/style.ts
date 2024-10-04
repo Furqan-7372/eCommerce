@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     },
     image: {
       width: width * 0.38,
-      height: height * 0.25, // Adjust the height as needed
+      height: height * 0.25,
       borderRadius: 5,
     },
     textContainer: {

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {View, TouchableOpacity, FlatList, ListRenderItem} from 'react-native';
 import CartTile from '../../Components/CartTile';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -17,15 +17,8 @@ import SubmitButton from '../../Components/SubmitButtom';
 const CartScreen: React.FC<ICartScreen> = () => {
   const dispatch = useDispatch();
   const cartData = useSelector((state: RootState) => state.cart.items);
-  const [totalAmount, setTotalAmount] = useState(0);
 
   const calculateTotal = () => {
-    setTotalAmount(
-      cartData.reduce(
-        (sum: number, item: CartItem) => sum + item.price * item.quantity,
-        0,
-      ),
-    );
     return cartData
       .reduce(
         (sum: number, item: CartItem) => sum + item.price * item.quantity,
@@ -71,10 +64,8 @@ const CartScreen: React.FC<ICartScreen> = () => {
   const renderItem: ListRenderItem<CartItem> = ({item}) => {
     return (
       <CartTile
-        imageSource={item.images}
-        itemName={item.name}
-        sizes={item.selectedSize}
-        colors={item.selectedColor}
+        image={item.image}
+        title={item.title}
         price={item.price}
         quantity={item.quantity}
         id={item.id}
@@ -103,7 +94,7 @@ const CartScreen: React.FC<ICartScreen> = () => {
         data={cartData}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        ListFooterComponent={renderFooter} // Footer for total and checkout
+        ListFooterComponent={renderFooter}
       />
     </View>
   );

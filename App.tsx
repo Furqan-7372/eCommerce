@@ -1,10 +1,16 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import MainNavigator from './src/Navigation/MainNavigator/MainNavigator';
-import { Provider } from 'react-redux';
-import store from './src/Redux/Store/Store'; // Adjust the path based on your structure
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import store, {persistor} from './src/Redux/Store/Store';
 
 const App = (): React.ReactElement => {
   return (
@@ -16,7 +22,9 @@ const App = (): React.ReactElement => {
           barStyle="dark-content"
         />
         <Provider store={store}>
-          <MainNavigator />
+          <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+            <MainNavigator />
+          </PersistGate>
         </Provider>
       </SafeAreaView>
     </NavigationContainer>

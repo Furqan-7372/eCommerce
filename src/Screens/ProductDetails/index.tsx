@@ -20,36 +20,23 @@ const ProductDetailScreen: React.FC = () => {
   const {productDetails} = route.params as {
     productDetails: IProductDetailsScreen['product'];
   };
-  const {id, name, price, sizes, colors, images} = productDetails;
-  const [selectedSize, setSelectedSize] = useState('Size');
-  const [selectedColor, setSelectedColor] = useState('Color');
 
-  const validateSelection = () => {
-    if (selectedSize === 'Size' || selectedColor === 'Color') {
-      Alert.alert('Selection Error', 'Please select size and color');
-      return false;
-    }
-    return true;
-  };
+  console.log('Details =>>>>>>', productDetails);
+
+  const {id, title, price, description, image} = productDetails;
 
   const handleAddToCart = () => {
-    const new_id = id + selectedColor + selectedSize;
-    if (validateSelection()) {
-      dispatch(
-        addToCart({
-          id: new_id,
-          quantity: 1,
-          selectedSize,
-          selectedColor,
-          price,
-          name,
-          images,
-          colors,
-          sizes,
-        }),
-      );
-      Alert.alert('Added to Cart', 'You can continue Shopping');
-    }
+    dispatch(
+      addToCart({
+        id,
+        quantity: 1,
+        price,
+        title,
+        image,
+        description,
+      }),
+    );
+    Alert.alert('Added to Cart', 'You can continue Shopping');
   };
 
   const handleShare = () => {
@@ -58,7 +45,7 @@ const ProductDetailScreen: React.FC = () => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: name,
+      title: title,
       headerTitleAlign: 'center',
       headerRight: () => (
         <TouchableOpacity
@@ -68,7 +55,7 @@ const ProductDetailScreen: React.FC = () => {
         </TouchableOpacity>
       ),
     });
-  }, [navigation, name]);
+  }, [navigation, title]);
 
   return (
     <View style={styles.container}>
@@ -77,48 +64,11 @@ const ProductDetailScreen: React.FC = () => {
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}>
         <View style={styles.imageScrollContainer}>
-          <Image source={images} style={styles.image} />
-          <Image source={images} style={styles.image} />
-          <Image source={images} style={styles.image} />
+          <Image source={{uri: image}} style={styles.image} />
+          <Image source={{uri: image}} style={styles.image} />
+          <Image source={{uri: image}} style={styles.image} />
         </View>
       </ScrollView>
-
-      <View style={styles.dropdownContainer}>
-        <View style={styles.dropdown}>
-          <Picker
-            style={styles.pickerText}
-            selectedValue={selectedSize}
-            onValueChange={itemValue => setSelectedSize(itemValue)}>
-            <Picker.Item label="Select Size" value="" />
-            {sizes.map((size: string, index: number) => (
-              <Picker.Item key={index} label={size} value={size} />
-            ))}
-          </Picker>
-        </View>
-
-        <View style={styles.dropdown}>
-          <Picker
-            style={styles.pickerText}
-            selectedValue={selectedColor}
-            onValueChange={itemValue => setSelectedColor(itemValue)}>
-            <Picker.Item label="Select Color" value="" />
-            {colors.map((color: string, index: number) => (
-              <Picker.Item key={index} label={color} value={color} />
-            ))}
-          </Picker>
-        </View>
-        <TouchableOpacity
-          onPress={() => {
-            console.log('Added to Fav');
-          }}
-          style={styles.favouriteIconContainer}>
-          <MaterialIcons
-            name="favorite-border"
-            size={25}
-            color={Colors.primary900}
-          />
-        </TouchableOpacity>
-      </View>
 
       <View style={styles.productInfo}>
         <View style={styles.productNamePriceContainer}>
@@ -126,7 +76,7 @@ const ProductDetailScreen: React.FC = () => {
             fontSize={height * 0.0273}
             fontFamily={Fonts.metropolisSemiBold}
             fontWeight="bold">
-            {name}
+            {title}
           </CustomText>
           <CustomText
             fontFamily={Fonts.metropolisSemiBold}
@@ -139,8 +89,7 @@ const ProductDetailScreen: React.FC = () => {
           fontFamily={Fonts.metropolisMedium}
           color={Colors.primary900}
           margin={10}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          {description}
         </CustomText>
       </View>
 

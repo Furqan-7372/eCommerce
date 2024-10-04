@@ -14,7 +14,7 @@ const ProductTile: React.FC<IProductTile> = ({
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={image} style={styles.image} />
+        <Image source={{uri: image}} style={styles.image} />
       </View>
       <View style={styles.textContainer}>
         <CustomText fontSize={18} fontFamily={Fonts.metropolisSemiBold}>

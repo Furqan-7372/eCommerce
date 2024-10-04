@@ -12,10 +12,8 @@ import styles from './style';
 
 
 const CartTile: React.FC<ICartTile> = ({
-  itemName,
-  imageSource,
-  color,
-  size,
+  title,
+  image,
   price,
   quantity,
   id,
@@ -48,35 +46,15 @@ const CartTile: React.FC<ICartTile> = ({
 
   return (
     <View style={styles.container}>
-      <Image source={imageSource} style={styles.itemImage} />
+      <Image source={{uri: image}} style={styles.itemImage} />
       <View style={styles.textContainer}>
         <View style={styles.nameOptionsContainer}>
           <CustomText fontSize={height*0.0210} fontFamily={Fonts.metropolisSemiBold}>
-            {itemName}
+            {title}
           </CustomText>
           <TouchableOpacity onPress={()=>handleRemoveItem(id)}>
             <SimpleLineIcons name="options-vertical" size={20} color={Colors.primary900} />
           </TouchableOpacity>
-        </View>
-        <View style={styles.colorSizeContainer}>
-          <View style={styles.colorContainer}>
-            <CustomText fontFamily={Fonts.metropolisRegular}>
-              Color:{' '}
-            </CustomText>
-            <CustomText
-              fontWeight={'bold'}
-              fontFamily={Fonts.metropolisRegular}>
-              {color}
-            </CustomText>
-          </View>
-          <View style={styles.sizeContainer}>
-            <CustomText fontFamily={Fonts.metropolisRegular}>Size: </CustomText>
-            <CustomText
-              fontWeight={'bold'}
-              fontFamily={Fonts.metropolisRegular}>
-              {size}
-            </CustomText>
-          </View>
         </View>
         <View style={styles.quantityPriceContainer}>
           <View style={styles.quantityButtonContainer}>

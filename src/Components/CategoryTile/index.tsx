@@ -8,7 +8,7 @@ import styles from './style';
 
 const CategoryTile: React.FC<CategoryTileProps> = ({
   categoryName,
-  imageSource,
+  image,
   onPress,
 }) => {
   return (
@@ -19,7 +19,7 @@ const CategoryTile: React.FC<CategoryTileProps> = ({
         </View>
       </View>
       <View style={styles.imageContainer}>
-        <Image source={imageSource} style={styles.categoryImage} />
+        <Image source={{uri: image}} style={styles.categoryImage} />
       </View>
     </TouchableOpacity>
   );
